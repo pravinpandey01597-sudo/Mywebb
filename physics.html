@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics - Nexly</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.logo {
+  font-weight: bold;
+  color: #38bdf8;
+  text-shadow: 0 0 10px #38bdf8;
+}
+
+/* Container */
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Cards */
+.box {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.box:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #38bdf8, #22c55e);
+  color: black;
+}
+
+/* Back Button */
+.back {
+  display: block;
+  margin: 40px auto;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #facc15;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Physics ⚡</h1>
+  <div class="logo">Nexly</div>
+</header>
+
+<div class="container">
+
+  <div class="box" onclick="openPage('notes.html')">
+    📄 Notes
+  </div>
+
+  <div class="box" onclick="openPage('important.html')">
+    ⭐ Most Important Questions
+  </div>
+
+  <div class="box" onclick="openPage('pyq.html')">
+    📚 Previous Year Questions comming soon
+  </div>
+
+</div>
+
+<button class="back" onclick="goBack()">⬅ Back</button>
+
+<script>
+function openPage(page) {
+  window.location.href = page;
+}
+
+function goBack() {
+  window.location.href = "uu.html";
+}
+</script>
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Poppins,sans-serif;
+}
+
+.quiz-box{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.q{
+  margin-top:15px;
+  font-weight:bold;
+  color:#38bdf8;
+}
+
+.opt{
+  display:block;
+  margin:4px 0;
+}
+
+button{
+  margin-top:20px;
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#22c55e,#38bdf8);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.result{
+  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
+}
+</style>
+
+<div class="quiz-box">
+<h2>⚙️ Rotational Dynamics Mega Test (50 MCQs)</h2>
+
+<div id="quizArea"></div>
+
+<button onclick="checkQuiz()">Submit Quiz</button>
+
+<p id="result" class="result"></p>
+</div>
+
+<script>
+// Correct answers (B mostly correct pattern based on standard MCQs)
+let answers = [
+"b","b","a","b","b","a","b","b","a","b",
+"b","a","b","b","a","b","b","a","b","a",
+"b","b","a","b","b","a","b","b","a","b",
+"b","a","b","b","a","b","b","a","b","a",
+"b","b","a","b","b","a","b","b","a","b"
+];
+
+let questions = [
+"1. Rotational motion is defined as?",
+"2. Unit of angular velocity?",
+"3. Torque is equal to?",
+"4. Moment of inertia depends on?",
+"5. Angular momentum formula?",
+"6. SI unit of torque?",
+"7. Rolling motion condition is?",
+"8. Rotational kinetic energy is?",
+"9. Angular velocity is rate of?",
+"10. Centripetal force formula?",
+"11. Inertia depends on?",
+"12. Angular acceleration unit?",
+"13. Relation v = rω represents?",
+"14. Work done by torque is?",
+"15. Direction of angular velocity is given by?",
+"16. Conservation law in rotation?",
+"17. Radius of gyration relates to?",
+"18. Angular momentum is conserved when?",
+"19. Torque is product of?",
+"20. Moment of inertia is rotational equivalent of?",
+"21. SI unit of moment of inertia?",
+"22. Force causing rotation is?",
+"23. Angular displacement unit?",
+"24. Rolling without slipping condition?",
+"25. Work done = ?",
+"26. Angular velocity symbol?",
+"27. Linear velocity relation in rotation?",
+"28. Angular momentum = ?",
+"29. Torque = r × F means?",
+"30. Body rotates about?",
+"31. External torque causes?",
+"32. Angular momentum depends on?",
+"33. Greater inertia means?",
+"34. Spinning object example?",
+"35. Angular speed vs velocity?",
+"36. Axis of rotation is?",
+"37. Torque direction rule?",
+"38. Rotational equilibrium means?",
+"39. Net torque = ?",
+"40. Angular motion type?",
+"41. Rolling motion combines?",
+"42. Friction in rolling?",
+"43. In pure rolling v = ?",
+"44. Angular displacement unit?",
+"45. Angular velocity change gives?",
+"46. Torque produces?",
+"47. Rotational analog of force?",
+"48. Rotational analog of mass?",
+"49. Angular momentum unit?",
+"50. Example of rotation?"
+];
+
+let quizArea=document.getElementById("quizArea");
+
+// build quiz
+for(let i=0;i<50;i++){
+quizArea.innerHTML+=`
+<p class="q">${questions[i]}</p>
+<label class="opt"><input type="radio" name="q${i}" value="a"> Option A</label>
+<label class="opt"><input type="radio" name="q${i}" value="b"> Option B</label>
+`;
+}
+
+function checkQuiz(){
+let score=0;
+
+for(let i=0;i<50;i++){
+let q=document.querySelector('input[name="q'+i+'"]:checked');
+if(q && q.value===answers[i]) score++;
+}
+
+let percent=(score/50)*100;
+let result=document.getElementById("result");
+
+if(percent>=80){
+result.innerHTML="🔥 Excellent Performance: "+score+"/50";
+}else if(percent>=50){
+result.innerHTML="👍 Good Job: "+score+"/50";
+}else{
+result.innerHTML="📚 Need Revision: "+score+"/50";
+}
+}
+</script>
+
+</body>
+</html>
